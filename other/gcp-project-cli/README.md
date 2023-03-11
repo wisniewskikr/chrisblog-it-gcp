@@ -41,6 +41,7 @@ PRECONDITIONS
 
 ##### Preconditions - Tools
 * Installed **Operating System** (tested on Windows 10)
+* Installed **GCP Cloud Cli** (tested on version 421.0.0)
 
 ##### Preconditions - Actions
 * Created Google Account
