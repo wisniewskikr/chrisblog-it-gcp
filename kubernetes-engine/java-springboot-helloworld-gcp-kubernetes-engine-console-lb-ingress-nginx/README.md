@@ -109,6 +109,8 @@ Link:
 
 ![My Image](readme-images/deploy-kubernetes-07.png)
 
+![My Image](readme-images/deploy-kubernetes-08.png)
+
 
 DELETE GCP KUBERNETES ENGINE
 ----------------------------
