@@ -19,7 +19,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to deploy **Kubernetes** application on **GCP Kubernetes Engine** using **GCP Console**. This Kubernetes uses Docker Image published on Docker Hub of **Java Spring Boot** application.
+The goal of this project is to present how to deploy **Kubernetes** application on **GCP Kubernetes Engine** using **GCP Console**. This application uses **Load Balancer** type **default** - provided by Google. This Kubernetes uses Docker Image published on Docker Hub of **Java Spring Boot** application.
 
 ##### Terminology
 Terminology explanation:
@@ -27,6 +27,8 @@ Terminology explanation:
 * **GCP Kubernetes Engine**: it's GCP service which enables deploying of Kubernetes applications on Google Cloud
 * **GCP Console**: it's web application which enables working with Google Cloud Platform (GCP) via internet's browser
 * **Java Spring Boot application**: it's application in Java programming language which uses Spring Boot framework. This application displays "Hello World" message, port and uuid in JSON format 
+* **Load Balancer**: this application redirects traffic to different instances of the same service
+* **kubectl**: this command line tool enables working with Kubernetes
 
 ##### Flow
 The following flow takes place in this project:
