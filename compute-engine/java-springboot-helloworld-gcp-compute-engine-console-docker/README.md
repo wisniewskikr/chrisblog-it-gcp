@@ -1,17 +1,14 @@
 USAGE
 -----
 
-> **NOTE** This usage assumes that user possesses **Google Account** with existing **GCP Project**.
+> **NOTE** This usage assumes that user possesses **Google Account** with existing **GCP Project**. It also assumes that **Docker Image** of **Java Spring Boot** application is deployed on public repository in **Docker Hub**. 
 
 Steps:
 1. Create GCP Compute Engine. Please check section **CREATE GCP COMPUTE ENGINE**
 1. Deploy application via SSH. Please check section **DEPLOY APPLICATION VIA SSH**
      * Update Linux version with `sudo apt update`
-     * Install Java 17 with `sudo apt install -y openjdk-17-jdk openjdk-17-jre`
-     * Install Maven with `sudo apt install -y maven`
-     * Install Git with `sudo apt install -y git`
-     * Clone application with `git clone https://github.com/wisniewskikr/chrisblog-it-gcp.git`
-     * Start application with `mvn -f chrisblog-it-gcp/compute-engine/java-springboot-helloworld-gcp-compute-engine-console-jar/pom.xml spring-boot:run`
+     * Install Docker with `sudo apt install docker.io`
+     * Start application with `sudo docker run -d -p 8080:8080 --name java-springboot-helloworld-container wisniewskikr/java-springboot-helloworld`
      * Visit application with `http://{PUBLIC-IP}:8080`
 1. Delete GCP Compute Engine. Please check section **DELETE GCP COMPUTE ENGINE**
 
@@ -20,7 +17,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to deploy **Java Spring Boot** application on **GCP Compute Engine** using **GCP Console**. Package **Jar** is used for the deployment.
+The goal of this project is to present how to deploy **Java Spring Boot** application on **GCP Compute Engine** using **GCP Console**. Tool **Docker** is used for the deployment.
 
 ##### Terminology
 Terminology explanation:
@@ -32,7 +29,7 @@ Terminology explanation:
 ##### Flow
 The following flow takes place in this project:
 1. User creates GCP Compute Engine
-1. User deploys application via SSH - installs Java, Maven, Git and then clones application from Github and run it
+1. User deploys application via SSH - installs Docker tool and starts application
 1. User opens deployed application URL in browser
 1. User via any browser sends request to application for a content
 1. Application HelloWorld returns response with JSON containing message, port and UUID. This response is presented to User via browser
@@ -47,6 +44,7 @@ This project uses following technologies:
 * **Maven**: `https://docs.google.com/document/d/1cfIMcqkWlobUfVfTLQp7ixqEcOtoTR8X6OGo3cU4maw/edit?usp=sharing`
 * **Git**: `https://docs.google.com/document/d/1Iyxy5DYfsrEZK5fxZJnYy5a1saARxd5LyMEscJKSHn0/edit?usp=sharing`
 * **Spring Boot**: `https://docs.google.com/document/d/1mvrJT5clbkr9yTj-AQ7YOXcqr2eHSEw2J8n9BMZIZKY/edit?usp=sharing`
+* **Docker**: `https://docs.google.com/document/d/1tKdfZIrNhTNWjlWcqUkg4lteI91EhBvaj6VDrhpnCnk/edit?usp=sharing`
 * **GCP**: `https://docs.google.com/document/d/1uXYLLTgD9b3RPs83S57WAsfCnuOrR9RdTJ7HLcaRzNY/edit?usp=sharing`
 
 
@@ -59,6 +57,8 @@ PRECONDITIONS
 ##### Preconditions - Actions
 * Created **Google Account**
 * Created **GCP Project**: `https://github.com/wisniewskikr/chrisblog-it-gcp/tree/main/other/gcp-project-console`
+* Prepared **Source Code** of application: `https://github.com/wisniewskikr/java-springboot-helloworld`
+* Prepared **Docker Image** of application: `https://hub.docker.com/repository/docker/wisniewskikr/java-springboot-helloworld/general`
 
 
 CREATE GCP COMPUTE ENGINE
@@ -103,14 +103,6 @@ Link:
 ![My Image](readme-images/deployment-via-ssh-04.png)
 
 ![My Image](readme-images/deployment-via-ssh-05.png)
-
-![My Image](readme-images/deployment-via-ssh-06.png)
-
-![My Image](readme-images/deployment-via-ssh-07.png)
-
-![My Image](readme-images/deployment-via-ssh-08.png)
-
-![My Image](readme-images/deployment-via-ssh-09.png)
 
 
 DELETE GCP COMPUTE ENGINE
