@@ -8,7 +8,11 @@ Steps:
 1. Deploy application via SSH. Please check section **DEPLOY APPLICATION VIA SSH**
      * Update Linux version with `sudo apt update`
      * Install Docker with `sudo apt install docker.io`
-     * Start application with `sudo docker run -d -p 8080:8080 --name java-springboot-helloworld-container wisniewskikr/java-springboot-helloworld`
+     * Install Docker Compose with `sudo curl -L https://github.com/docker/compose/releases/download/v2.16.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose`
+     * Permit Docker Compose with `sudo chmod +x /usr/local/bin/docker-compose`
+     * Install Git with `sudo apt install -y git`
+     * Clone application with `sudo git clone https://github.com/wisniewskikr/chrisblog-it-gcp.git`
+     * Start application with `sudo docker-compose -f chrisblog-it-gcp/compute-engine/java-springboot-helloworld-gcp-compute-engine-console-docker-compose/docker-compose.yml up -d`
      * Visit application with `http://{PUBLIC-IP}:8080`
 1. Delete GCP Compute Engine. Please check section **DELETE GCP COMPUTE ENGINE**
 
@@ -17,7 +21,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to deploy **Java Spring Boot** application on **GCP Compute Engine** using **GCP Console**. Tool **Docker** is used for the deployment.
+The goal of this project is to present how to deploy **Java Spring Boot** application on **GCP Compute Engine** using **GCP Console**. Tool **Docker Compose** is used for the deployment.
 
 ##### Terminology
 Terminology explanation:
@@ -45,6 +49,7 @@ This project uses following technologies:
 * **Git**: `https://docs.google.com/document/d/1Iyxy5DYfsrEZK5fxZJnYy5a1saARxd5LyMEscJKSHn0/edit?usp=sharing`
 * **Spring Boot**: `https://docs.google.com/document/d/1mvrJT5clbkr9yTj-AQ7YOXcqr2eHSEw2J8n9BMZIZKY/edit?usp=sharing`
 * **Docker**: `https://docs.google.com/document/d/1tKdfZIrNhTNWjlWcqUkg4lteI91EhBvaj6VDrhpnCnk/edit?usp=sharing`
+* **Docker Compose**: `https://docs.google.com/document/d/1SPrCS5OS_G0je_wmcLGrX8cFv7ZkQbb5uztNc9kElS4/edit?usp=sharing`
 * **GCP**: `https://docs.google.com/document/d/1uXYLLTgD9b3RPs83S57WAsfCnuOrR9RdTJ7HLcaRzNY/edit?usp=sharing`
 
 
