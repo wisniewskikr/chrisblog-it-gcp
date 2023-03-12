@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  helloworld:
+    image: wisniewskikr/java-springboot-helloworld
+    container_name: helloworld-container
+    ports:
+      - 8080:8080
+    networks:
+      - helloworld-network
+
+networks:
+  helloworld-network:
+    name: helloworld-network-name
