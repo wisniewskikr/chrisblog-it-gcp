@@ -1,5 +1,7 @@
 package com.example.services;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.springframework.stereotype.Service;
@@ -16,12 +18,12 @@ public class GcpCloudStorageService {
 	
 	private static Storage storage = StorageOptions.getDefaultInstance().getService(); 
 	
-	public String upload(MultipartFile file) throws IOException {
+	public String upload(File file) throws IOException {
 		
 		try {			
 			BlobInfo blobInfo = storage.create(
-				BlobInfo.newBuilder("helloworld-wisniewskir-bucket", file.getOriginalFilename()).build(),
-				file.getBytes(),
+				BlobInfo.newBuilder("helloworld-wisniewskir-bucket", file.getName()).build(),
+				new FileInputStream(file).readAllBytes(),
 				BlobTargetOption.predefinedAcl(PredefinedAcl.PUBLIC_READ)
 			);
 			

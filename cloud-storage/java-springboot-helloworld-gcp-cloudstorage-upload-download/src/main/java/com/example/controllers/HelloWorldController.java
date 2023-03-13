@@ -3,7 +3,7 @@ package com.example.controllers;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,8 +21,8 @@ public class HelloWorldController {
 	
 	Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
 	
-	@Value("${file.name}")
-	private String fileName;
+//	@Value("${file.name}")
+//	private String fileName;
 	
 	private GcpCloudStorageService gcpCloudStorageService;
 
@@ -34,7 +34,10 @@ public class HelloWorldController {
 
 
 	@RequestMapping(value="/")
-	public HelloWorldJson helloWorld() throws FileNotFoundException {
+	public HelloWorldJson helloWorld() throws IOException {
+		
+		File file = new File(getClass().getClassLoader().getResource("helloworld.txt").getFile());
+		gcpCloudStorageService.upload(file);
 		
 		String message = "Hello World";
 		
