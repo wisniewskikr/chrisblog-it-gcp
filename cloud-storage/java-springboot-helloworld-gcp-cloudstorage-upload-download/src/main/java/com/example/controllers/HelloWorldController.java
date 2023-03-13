@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.jsons.HelloWorldJson;
 import com.example.services.AzureStorageAccountService;
+import com.example.services.GcpCloudStorageService;
 
 @RestController
 public class HelloWorldController {
@@ -23,17 +24,19 @@ public class HelloWorldController {
 	@Value("${file.name}")
 	private String fileName;
 	
-	private AzureStorageAccountService azureStorageAccountService;
+	private GcpCloudStorageService gcpCloudStorageService;
 
 	@Autowired
-	public HelloWorldController(AzureStorageAccountService azureStorageAccountService) {
-		this.azureStorageAccountService = azureStorageAccountService;
+	public HelloWorldController(GcpCloudStorageService gcpCloudStorageService) {
+		this.gcpCloudStorageService = gcpCloudStorageService;
 	}
+
+
 
 	@RequestMapping(value="/")
 	public HelloWorldJson helloWorld() throws FileNotFoundException {
 		
-		String message = uploadDownloadAndGetMessageFromAzzure();
+		String message = "Hello World";
 		
 		logger.info("Application was called with message: {}", message);
 		
@@ -41,18 +44,18 @@ public class HelloWorldController {
 		
 	}
 	
-	private String uploadDownloadAndGetMessageFromAzzure() throws FileNotFoundException {
-		
-		String message = null;
-		
-		File file = new File(getClass().getClassLoader().getResource(fileName).getFile());
-		azureStorageAccountService.uploadFile(file.getName(), new FileInputStream(file), file.length());
-		ByteArrayOutputStream baos = azureStorageAccountService.downloadFile(file.getName());
-		message = new String(baos.toString());
-		azureStorageAccountService.deleteFile(fileName);
-		
-		return message;
-		
-	}
+//	private String uploadDownloadAndGetMessageFromAzzure() throws FileNotFoundException {
+//		
+//		String message = null;
+//		
+//		File file = new File(getClass().getClassLoader().getResource(fileName).getFile());
+//		azureStorageAccountService.uploadFile(file.getName(), new FileInputStream(file), file.length());
+//		ByteArrayOutputStream baos = azureStorageAccountService.downloadFile(file.getName());
+//		message = new String(baos.toString());
+//		azureStorageAccountService.deleteFile(fileName);
+//		
+//		return message;
+//		
+//	}
 	
 }
