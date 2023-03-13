@@ -6,12 +6,15 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.WritableByteChannel;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Bucket;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 
@@ -19,6 +22,18 @@ import com.google.cloud.storage.StorageOptions;
 public class GcpCloudStorageService {
 	
 	private static Storage storage = StorageOptions.getDefaultInstance().getService(); 
+	
+	public List<Bucket> getBucketList() {
+		
+		List<Bucket> bucketList = new ArrayList<Bucket>();
+		
+		for (Bucket bucket : storage.list().iterateAll()) {
+			bucketList.add(bucket);
+		}
+		
+		return bucketList;
+		
+	}
 	
 	public void uploadFile(File file, String bucketName) throws IOException {
 		
