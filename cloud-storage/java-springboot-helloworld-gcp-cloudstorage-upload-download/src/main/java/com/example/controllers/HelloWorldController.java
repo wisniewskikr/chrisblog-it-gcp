@@ -2,7 +2,6 @@ package com.example.controllers;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.slf4j.Logger;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.jsons.HelloWorldJson;
-import com.example.services.AzureStorageAccountService;
 import com.example.services.GcpCloudStorageService;
 
 @RestController
@@ -39,10 +37,7 @@ public class HelloWorldController {
 	@RequestMapping(value="/")
 	public HelloWorldJson helloWorld() throws IOException {
 		
-		File file = new File(getClass().getClassLoader().getResource(fileName).getFile());
-		gcpCloudStorageService.upload(file, bucketName);
-		
-		String message = "Hello World";
+		String message = uploadDownloadAndGetMessageFromGcp();
 		
 		logger.info("Application was called with message: {}", message);
 		
@@ -50,18 +45,18 @@ public class HelloWorldController {
 		
 	}
 	
-//	private String uploadDownloadAndGetMessageFromAzzure() throws FileNotFoundException {
-//		
-//		String message = null;
-//		
-//		File file = new File(getClass().getClassLoader().getResource(fileName).getFile());
-//		azureStorageAccountService.uploadFile(file.getName(), new FileInputStream(file), file.length());
-//		ByteArrayOutputStream baos = azureStorageAccountService.downloadFile(file.getName());
-//		message = new String(baos.toString());
+	private String uploadDownloadAndGetMessageFromGcp() throws IOException {
+		
+		String message = null;
+		
+		File file = new File(getClass().getClassLoader().getResource(fileName).getFile());
+		gcpCloudStorageService.uploadFile(file, bucketName);
+		ByteArrayOutputStream baos = gcpCloudStorageService.downloadFile(file.getName(), bucketName);
+		message = new String(baos.toString());
 //		azureStorageAccountService.deleteFile(fileName);
-//		
-//		return message;
-//		
-//	}
+		
+		return message;
+		
+	}
 	
 }
