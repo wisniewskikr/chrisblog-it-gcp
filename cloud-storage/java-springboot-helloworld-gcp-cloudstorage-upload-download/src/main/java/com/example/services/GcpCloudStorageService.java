@@ -23,8 +23,8 @@ public class GcpCloudStorageService {
 		try {			
 			BlobInfo blobInfo = storage.create(
 				BlobInfo.newBuilder("helloworld-wisniewskir-bucket", file.getName()).build(),
-				new FileInputStream(file).readAllBytes(),
-				BlobTargetOption.predefinedAcl(PredefinedAcl.PUBLIC_READ)
+				new FileInputStream(file).readAllBytes()
+//				BlobTargetOption.predefinedAcl(PredefinedAcl.PUBLIC_READ)
 			);
 			
 			return blobInfo.getMediaLink();
