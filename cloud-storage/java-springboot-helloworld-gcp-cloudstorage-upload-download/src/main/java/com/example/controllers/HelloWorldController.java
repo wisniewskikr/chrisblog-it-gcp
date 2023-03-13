@@ -24,6 +24,9 @@ public class HelloWorldController {
 	@Value("${file.name}")
 	private String fileName;
 	
+	@Value("${bucket.name}")
+	private String bucketName;
+	
 	private GcpCloudStorageService gcpCloudStorageService;
 
 	@Autowired
@@ -37,7 +40,7 @@ public class HelloWorldController {
 	public HelloWorldJson helloWorld() throws IOException {
 		
 		File file = new File(getClass().getClassLoader().getResource(fileName).getFile());
-		gcpCloudStorageService.upload(file);
+		gcpCloudStorageService.upload(file, bucketName);
 		
 		String message = "Hello World";
 		
