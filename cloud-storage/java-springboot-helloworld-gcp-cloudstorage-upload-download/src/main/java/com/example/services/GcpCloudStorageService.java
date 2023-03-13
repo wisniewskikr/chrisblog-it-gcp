@@ -35,6 +35,31 @@ public class GcpCloudStorageService {
 		
 	}
 	
+	public Bucket getBucket(String bucketName) {
+		
+		for (Bucket bucket : storage.list().iterateAll()) {
+			if (bucketName.equals(bucket.getName())) {
+				return bucket;
+			}
+		}
+		
+		return null;
+		
+	}
+	
+	public List<Blob> getBlobList(String bucketName) {
+		
+		List<Blob> blobList = new ArrayList<Blob>();
+		
+		Bucket bucket = getBucket(bucketName);
+		for (Blob blob : bucket.list().iterateAll()) {
+			blobList.add(blob);
+		}
+		
+		return blobList;
+		
+	}
+	
 	public void uploadFile(File file, String bucketName) throws IOException {
 		
 		BlobId blobId = BlobId.of(bucketName, file.getName());		

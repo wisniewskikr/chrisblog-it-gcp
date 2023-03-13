@@ -35,7 +35,7 @@ public class HelloWorldController {
 
 
 	@RequestMapping(value="/")
-	public HelloWorldJson helloWorld() throws IOException {
+	public HelloWorldJson helloWorld() throws IOException {		
 		
 		String message = uploadDownloadAndGetMessageFromGcp();
 		
