@@ -3,6 +3,8 @@ USAGE
 
 > **NOTE** This usage assumes that user possesses **Google Account** with existing **GCP Project**. 
 
+> **NOTE** Result file with private kay can be used for access to GCP services. Usage in Java Spring Boot: property **property spring.cloud.gcp.credentials.location** in the file **application properties**. For instance: spring.cloud.gcp.credentials.location=classpath:/gcp-credentials.json**
+
 Steps:
 1. Create GCP IAM Service Account. Please check section **CREATE GCP IAM SERVICE ACCOUNT**
 1. Delete GCP IAM Service Account. Please check section **DELETE GCP IAM SERVICE ACCOUNT**

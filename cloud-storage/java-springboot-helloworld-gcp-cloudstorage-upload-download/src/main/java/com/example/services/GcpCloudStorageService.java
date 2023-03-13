@@ -7,13 +7,10 @@ import java.io.IOException;
 
 import org.springframework.stereotype.Service;
 
+import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
-
-import java.nio.ByteBuffer;
-
-import com.google.cloud.ReadChannel;
 
 @Service
 public class GcpCloudStorageService {
@@ -47,22 +44,21 @@ public class GcpCloudStorageService {
 		
   	}
 	
-	public ByteArrayOutputStream downloadFile(String fileName, String bucketName) {
+	public ByteArrayOutputStream downloadFile(String fileName, String bucketName) throws IOException {
 		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		
-		try (ReadChannel channel = storage.reader(bucketName, fileName)) {
-			ByteBuffer bytes = ByteBuffer.allocate(64 * 1024);
-			while (channel.read(bytes) > 0) {
-				bytes.flip();
-				baos.writeBytes(bytes.array());
-				bytes.clear();
-			}
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-
+		BlobId blobId = BlobId.of(bucketName, fileName);
+		byte[] content = storage.readAllBytes(blobId);
+		baos.write(content);
 		return baos;
+		
+	}
+	
+	public void deleteFile(String fileName, String bucketName) {
+		
+		BlobId blobId = BlobId.of(bucketName, fileName);
+		storage.delete(blobId);
 		
 	}
 

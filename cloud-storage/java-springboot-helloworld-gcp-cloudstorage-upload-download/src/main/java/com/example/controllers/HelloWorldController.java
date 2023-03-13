@@ -53,7 +53,7 @@ public class HelloWorldController {
 		gcpCloudStorageService.uploadFile(file, bucketName);
 		ByteArrayOutputStream baos = gcpCloudStorageService.downloadFile(file.getName(), bucketName);
 		message = new String(baos.toString());
-//		azureStorageAccountService.deleteFile(fileName);
+		gcpCloudStorageService.deleteFile(file.getName(), bucketName);
 		
 		return message;
 		
